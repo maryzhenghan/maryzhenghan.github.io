@@ -1,1 +1,58 @@
-Hello World
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>weatherVane | mood music</title>
+	<meta name="description" content="Hi, I'm weatherVane. I was built to play curated music to match your climate conditions. Let's get started.">
+	<link rel="stylesheet" type="text/css" href="../index.css">
+	<link href="https://fonts.googleapis.com/css?family=Flamenco:300|Josefin+Sans:300i" rel="stylesheet">
+	<!-- <link id="favicon" rel="icon" type="image/x-icon" href=""> -->
+</head>
+
+<body>
+	<header role="banner">
+		<h1>weatherVane</h1>
+		<h2>Curated music to match your location's climate conditions</h2>
+	</header>
+
+	<main role="main">
+		<section role="section" class="js-homepage">
+			<button class="js-startbutton">click here to start</button>
+		</section>
+
+		<section class="js-weatherpage hidden">
+			<div class="js-weatherpage-locationform">
+				<form role="form" class="js-form-zipcode">
+					<fieldset>
+						<h3>Within the United States:</h3>
+						<label for="zipcode">Zip code</label>
+						<input id="zipcode" class="js-zipcode form-textinput" type="text" name="zipcode">
+						<input type="submit" name="zipcode-submit" class="form-submitbutton">
+					</fieldset>
+				</form>
+
+				<form role="form" class="js-form-citycountry">
+					<fieldset>
+						<h3>Outside of the United States:</h3>
+						<label for="city">City</label>
+						<input id="city" class="js-city form-textinput" type="text" name="city">
+						<label for="countrycode">Country Code</label>
+						<input id="countrycode" class="js-countrycode form-textinput" type="text" name="country">
+						<input type="submit" name="city-submit" class="form-submitbutton">
+					</fieldset>
+				</form>
+			</div>
+		</section>
+
+		<section class="js-resultspage hidden">
+			<div class="map" id="map"></div>
+			<iframe width="400" height="80" frameborder="0" allow="encrypted-media" allowtransparency="true" class="js-playlistiframe"></iframe>
+		</section>
+	</main>
+
+	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+	<script type="text/javascript" src="../weatherbank.js"></script>
+	<script type="text/javascript" src="../index.js"></script>
+
+	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFAVFzwPGwOzyFXFsl7nD4O_tKV-SmDZI&callback=initMap"></script>
+</body>
+</html>
