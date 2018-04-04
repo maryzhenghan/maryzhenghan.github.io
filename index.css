@@ -1,0 +1,75 @@
+html, body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+html {
+	background: url('https://images.unsplash.com/photo-1511389290465-d11bafd4c1df?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=2e5f65f729a037b1278b23e479e0c873') no-repeat center center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+
+body {
+	font-family: 'Josefin Sans', sans-serif;
+}
+
+header {
+	margin-top: 5%;
+}
+
+header, main {
+	padding-left: 15%;
+}
+
+h1 {
+	margin-bottom: 0;
+	color: #39412C;
+	font-family: 'Flamenco', cursive;
+}
+
+h2 {
+	margin-top: 0;
+	color: grey;
+	font-size: 16px;
+}
+
+button, .form-submitbutton {
+	border: 1px solid lightgrey;
+	color: grey;
+	padding: 7px 10px;
+	text-transform: uppercase;
+}
+
+.hidden {
+	display: none;
+}
+
+
+/* WEATHER PAGE */
+
+fieldset {
+	border: 0;
+}
+
+label {
+	display: block;
+}
+
+.form-textinput {
+	padding: 7px;
+}
+
+
+/* RESULTS PAGE */
+
+.map {
+	margin-bottom: 5px;
+}
+
+#map {
+	height: 350px;
+	width: 400px;
+}
