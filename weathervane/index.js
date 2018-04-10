@@ -2,10 +2,23 @@ const OPENWEATHER_SEARCH_URL = 'https://api.openweathermap.org/data/2.5/weather'
 const UNSPLASH_SEARCH_URL = 'https://api.unsplash.com/photos/random/';
 let map;
 
+function restartButton() {
+	$('.js-restartbutton').on('click', function(event){
+		event.preventDefault();
+
+		$('.js-locationpage').removeClass("hidden");
+		$('.js-resultspage').addClass("hidden");
+	});
+}
 
 function changeBg(unsplashData) {
 	const unsplashBgUrl = unsplashData.urls.full;
 	$('html').css("background", `url('${unsplashBgUrl}') no-repeat center center fixed`);
+	$('html').css("background-size", "cover");
+
+	const unsplashUser = unsplashData.user.username;
+	const unsplashName = unsplashData.user.name;
+	$('.js-unsplashattr').html(`<a href="https://unsplash.com/@${unsplashUser}?utm_source=weatherVaneByMaryHan&utm_medium=referral" target="_blank" class="js-unsplashattr-artist unsplash-attr">${unsplashName}</a>`);
 }
 
 function getUnsplashData(weatherIcon, callback) {
@@ -14,273 +27,33 @@ function getUnsplashData(weatherIcon, callback) {
 		query: weatherPhotoSearch,
 		orientation: 'landscape',
 		featured: '',
+		w: 1920,
 		client_id: '18f4244f98bfff352004a8687212d4a90fc64ad55bfa3402e323e10f9041ec22',
 	}
 
 	$.getJSON(UNSPLASH_SEARCH_URL, query, callback);
 }
 
-function initMap(locationLat, locationLng) {
+function displayMap(locationLat, locationLng, weatherIcon) {
 	const numberLat = Number(locationLat);
 	const numberLng = Number(locationLng);
+	const dayNight = weatherBank[weatherIcon].dayNight;
 
+	if (dayNight === 'day') {
 	map = new google.maps.Map(document.getElementById('map'), {
 		center: {lat: numberLat, lng: numberLng},
 		zoom: 10,
-		styles:[
-		  {
-		    "elementType": "geometry",
-		    "stylers": [
-		      {
-		        "color": "#f5f5f5"
-		      }
-		    ]
-		  },
-		  {
-		    "elementType": "labels.icon",
-		    "stylers": [
-		      {
-		        "visibility": "off"
-		      }
-		    ]
-		  },
-		  {
-		    "elementType": "labels.text.fill",
-		    "stylers": [
-		      {
-		        "color": "#616161"
-		      }
-		    ]
-		  },
-		  {
-		    "elementType": "labels.text.stroke",
-		    "stylers": [
-		      {
-		        "color": "#f5f5f5"
-		      }
-		    ]
-		  },
-		  {
-		    "featureType": "administrative",
-		    "elementType": "geometry",
-		    "stylers": [
-		      {
-		        "visibility": "off"
-		      }
-		    ]
-		  },
-		  {
-		    "featureType": "administrative.land_parcel",
-		    "stylers": [
-		      {
-		        "visibility": "off"
-		      }
-		    ]
-		  },
-		  {
-		    "featureType": "administrative.land_parcel",
-		    "elementType": "labels.text.fill",
-		    "stylers": [
-		      {
-		        "color": "#bdbdbd"
-		      }
-		    ]
-		  },
-		  {
-		    "featureType": "administrative.neighborhood",
-		    "stylers": [
-		      {
-		        "visibility": "off"
-		      }
-		    ]
-		  },
-		  {
-		    "featureType": "poi",
-		    "stylers": [
-		      {
-		        "visibility": "off"
-		      }
-		    ]
-		  },
-		  {
-		    "featureType": "poi",
-		    "elementType": "geometry",
-		    "stylers": [
-		      {
-		        "color": "#eeeeee"
-		      }
-		    ]
-		  },
-		  {
-		    "featureType": "poi",
-		    "elementType": "labels.text.fill",
-		    "stylers": [
-		      {
-		        "color": "#757575"
-		      }
-		    ]
-		  },
-		  {
-		    "featureType": "poi.park",
-		    "elementType": "geometry",
-		    "stylers": [
-		      {
-		        "color": "#e5e5e5"
-		      }
-		    ]
-		  },
-		  {
-		    "featureType": "poi.park",
-		    "elementType": "labels.text.fill",
-		    "stylers": [
-		      {
-		        "color": "#9e9e9e"
-		      }
-		    ]
-		  },
-		  {
-		    "featureType": "road",
-		    "elementType": "geometry",
-		    "stylers": [
-		      {
-		        "color": "#ffffff"
-		      }
-		    ]
-		  },
-		  {
-		    "featureType": "road",
-		    "elementType": "labels",
-		    "stylers": [
-		      {
-		        "visibility": "off"
-		      }
-		    ]
-		  },
-		  {
-		    "featureType": "road",
-		    "elementType": "labels.icon",
-		    "stylers": [
-		      {
-		        "visibility": "off"
-		      }
-		    ]
-		  },
-		  {
-		    "featureType": "road.arterial",
-		    "stylers": [
-		      {
-		        "visibility": "off"
-		      }
-		    ]
-		  },
-		  {
-		    "featureType": "road.arterial",
-		    "elementType": "labels.text.fill",
-		    "stylers": [
-		      {
-		        "color": "#757575"
-		      }
-		    ]
-		  },
-		  {
-		    "featureType": "road.highway",
-		    "elementType": "geometry",
-		    "stylers": [
-		      {
-		        "color": "#dadada"
-		      }
-		    ]
-		  },
-		  {
-		    "featureType": "road.highway",
-		    "elementType": "labels",
-		    "stylers": [
-		      {
-		        "visibility": "off"
-		      }
-		    ]
-		  },
-		  {
-		    "featureType": "road.highway",
-		    "elementType": "labels.text.fill",
-		    "stylers": [
-		      {
-		        "color": "#616161"
-		      }
-		    ]
-		  },
-		  {
-		    "featureType": "road.local",
-		    "stylers": [
-		      {
-		        "visibility": "off"
-		      }
-		    ]
-		  },
-		  {
-		    "featureType": "road.local",
-		    "elementType": "labels.text.fill",
-		    "stylers": [
-		      {
-		        "color": "#9e9e9e"
-		      }
-		    ]
-		  },
-		  {
-		    "featureType": "transit",
-		    "stylers": [
-		      {
-		        "visibility": "off"
-		      }
-		    ]
-		  },
-		  {
-		    "featureType": "transit.line",
-		    "elementType": "geometry",
-		    "stylers": [
-		      {
-		        "color": "#e5e5e5"
-		      }
-		    ]
-		  },
-		  {
-		    "featureType": "transit.station",
-		    "elementType": "geometry",
-		    "stylers": [
-		      {
-		        "color": "#eeeeee"
-		      }
-		    ]
-		  },
-		  {
-		    "featureType": "water",
-		    "elementType": "geometry",
-		    "stylers": [
-		      {
-		        "color": "#c9c9c9"
-		      }
-		    ]
-		  },
-		  {
-		    "featureType": "water",
-		    "elementType": "labels.text",
-		    "stylers": [
-		      {
-		        "visibility": "off"
-		      }
-		    ]
-		  },
-		  {
-		    "featureType": "water",
-		    "elementType": "labels.text.fill",
-		    "stylers": [
-		      {
-		        "color": "#9e9e9e"
-		      }
-		    ]
-		  }
-		]
+		styles: mapGrayscaleStyling
 	});
+	}
+	
+	else {
+	map = new google.maps.Map(document.getElementById('map'), {
+		center: {lat: numberLat, lng: numberLng},
+		zoom: 10,
+		styles: mapGrayscaleStylingNight
+	});
+	}
 }
 
 function displayPlaylist(weatherIcon) {
@@ -293,52 +66,94 @@ function displayPlaylist(weatherIcon) {
 	$('.js-playlistiframe').attr("src", `${spotifyUrl}`);
 }
 
+function apiZipcodeFail(data) {
+	$('.js-errormessage-zc').addClass("hidden");
+
+	const apiError = data.responseJSON.message;
+	$('.js-apierrormessage-zc').removeClass("hidden");
+	$('.js-apierrormessage-zc').html(`Error: ${apiError}. Please try again.`);
+
+}
+
+function apiCityCountryFail(data) {
+	$('.js-errormessage-city, .js-errormessage-cc').addClass("hidden");
+
+	const apiError = data.responseJSON.message;
+	$('.js-apierrormessage-cc').removeClass("hidden");
+	$('.js-apierrormessage-cc').html(`Error: ${apiError}. Please try again.`);
+
+}
+
 function displayApiSearchData(data) {
+	$('.js-resultspage').addClass("hidden");
+	$('.form-textinput').val('');
+	$('.js-locationpage').addClass("hidden");
+	$('.js-errormessage-zc, .js-errormessage-city, .js-errormessage-cc, .js-apierrormessage-zc, .js-apierrormessage-cc').addClass("hidden");
+
 	const weatherIcon = data.weather[0].icon;
 
 	const locationLat = data.coord.lat;
 	const locationLng = data.coord.lon;
 
 	displayPlaylist(weatherIcon);
-	initMap(locationLat, locationLng);
+	displayMap(locationLat, locationLng, weatherIcon);
 	getUnsplashData(weatherIcon, changeBg);
+	restartButton();
 }
 
-function getWeatherData(searchTerm, searchTerm2, callback) {
+function getWeatherData(searchTerm, searchTerm2, callback, failCallback) {
 	const query = {
 		q: `${searchTerm},${searchTerm2}`,
 		units: 'imperial',
 		APPID: '753488c2e76956786a10dc9e1ab0243a',
 	}
 
-	$.getJSON(OPENWEATHER_SEARCH_URL, query, callback);
+	$.getJSON(OPENWEATHER_SEARCH_URL, query, callback).fail(failCallback);
 }
 
 
 function submitLocation() {
+	$('.js-locationpage').removeClass("hidden");
+
 	$('.js-form-zipcode').submit(function(event) {
 		event.preventDefault();
+		$('.js-errormessage-zc, .js-apierrormessage-zc').addClass("hidden");
+
+		if ($('.js-zipcode').val() === '') {
+			$('.js-errormessage-zc').removeClass("hidden");
+			return;
+		}
+		else if ($('.js-zipcode').val().length <= 4) {
+			$('.js-errormessage-zc').removeClass("hidden");
+			return;
+		}
 
 		const zipcodeTarget = $(event.currentTarget).find('.js-zipcode');
 		const zipcode = zipcodeTarget.val();
 		const countryDefault = 'us';
 
-		$('.js-weatherpage').addClass("hidden");
-
-		getWeatherData(zipcode, countryDefault, displayApiSearchData);
+		getWeatherData(zipcode, countryDefault, displayApiSearchData, apiZipcodeFail);
 	});
 
 	$('.js-form-citycountry').submit(function(event) {
 		event.preventDefault();
+		$('.js-errormessage-city, .js-errormessage-cc, .js-apierrormessage-cc').addClass("hidden");
+
+		if ($('.js-city').val() === '') {
+			$('.js-errormessage-city').removeClass("hidden");
+			return;
+		}
+		else if ($('.js-countrycode').val() === '') {
+			$('.js-errormessage-cc').removeClass("hidden");
+			return;
+		}
 
 		const cityTarget = $(event.currentTarget).find('.js-city');
 		const city = cityTarget.val();
 		const countrycodeTarget = $(event.currentTarget).find('.js-countrycode');
 		const countryCode = countrycodeTarget.val();
 
-		$('.js-weatherpage').addClass("hidden");
-
-		getWeatherData(city, countryCode, displayApiSearchData);
+		getWeatherData(city, countryCode, displayApiSearchData, apiCityCountryFail);
 	});
 }
 
@@ -346,16 +161,11 @@ function startApp() {
 	$('.js-startbutton').on('click', function(event){
 		event.preventDefault();
 
+		$('.js-resultspage').addClass("hidden");
 		$('.js-homepage').addClass("hidden");
-		$('.js-weatherpage').removeClass("hidden");
 
 		submitLocation();
 	});
 }
 
-function masterCallback() {
-	startApp();
-}
-
-
-$(masterCallback);
+$(startApp);

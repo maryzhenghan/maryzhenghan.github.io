@@ -1,0 +1,56 @@
+/* SMARTPHONES & TABLETS & SMALLER BROWSERS (PORTRAIT & LANDSCAPE) */
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+  header, main {
+    padding-left: 8%;
+  }
+
+  h2 {
+    width: 70%;
+  }
+
+  .js-startbutton {
+    width: 40%;
+  }
+
+  .js-weatherpage-locationform {
+    width: 90%;
+  }
+
+  #map {
+    height: 250px;
+    width: 250px;
+  }
+
+  .js-playlistiframe {
+    width: 250px;
+  }
+}
+
+
+/* SMARTPHONES & TABLETS & SMALLER BROWSERS (LANDSCAPE) */
+@media only screen and (min-width : 321px) and (max-width : 900px) {
+  header, main {
+    padding-left: 8%;
+  }
+
+  h2 {
+    width: 60%;
+  }
+
+  .js-startbutton {
+    width: 40%;
+  }
+
+  .js-weatherpage-locationform {
+    margin-bottom: 15%;
+    width: 90%;
+  }
+
+  .js-restartbutton {
+    margin-bottom: 10%;
+  }
+
+  .photo-attr {
+    width: 20%;
+  }
+}

@@ -3,56 +3,72 @@
 <head>
 	<title>weatherVane | mood music</title>
 	<meta name="description" content="Hi, I'm weatherVane. I was built to play curated music to match your climate conditions. Let's get started.">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="index.css">
-	<link href="https://fonts.googleapis.com/css?family=Flamenco:300|Josefin+Sans:300i" rel="stylesheet">
-	<!-- <link id="favicon" rel="icon" type="image/x-icon" href=""> -->
+	<link rel="stylesheet" type="text/css" href="responsive.css">
+	<link href="https://fonts.googleapis.com/css?family=Flamenco:300|Josefin+Sans:300i|Lato" rel="stylesheet">
+	<link id="favicon" rel="icon" type="image/x-icon" href="cloud-favicon.png">
 </head>
 
 <body>
 	<header role="banner">
-		<h1>weatherVane</h1>
-		<h2>Curated music to match your location's climate conditions</h2>
+		<h1 class="logo"><a href="/">weatherVane</a></h1>
+		<h2>curated music to match your location's climate conditions</h2>
 	</header>
 
 	<main role="main">
-		<section role="section" class="js-homepage">
-			<button class="js-startbutton">click here to start</button>
+		<section role="section" class="js-homepage" id="home-page">
+			<button class="js-startbutton" aria-labelledby="home-page">click to start</button>
 		</section>
 
-		<section class="js-weatherpage hidden">
-			<div class="js-weatherpage-locationform">
+		<section class="js-locationpage hidden" id="location-page">
+			<div class="js-locationpage-locationform" aria-labelledby="location-page">
 				<form role="form" class="js-form-zipcode">
 					<fieldset>
-						<h3>Within the United States:</h3>
+						<legend>Within the United States:</legend>
 						<label for="zipcode">Zip code</label>
-						<input id="zipcode" class="js-zipcode form-textinput" type="text" name="zipcode">
+						<input id="zipcode" class="js-zipcode form-textinput" type="text" name="zipcode" placeholder="eg. 27705">
 						<input type="submit" name="zipcode-submit" class="form-submitbutton">
+						<span class ="js-errormessage-zc hidden">*Please enter a valid zip code</span>
+						<span class="js-apierrormessage-zc hidden"></span>
 					</fieldset>
 				</form>
 
 				<form role="form" class="js-form-citycountry">
 					<fieldset>
-						<h3>Outside of the United States:</h3>
+						<legend>Outside of the United States:</legend>
 						<label for="city">City</label>
-						<input id="city" class="js-city form-textinput" type="text" name="city">
-						<label for="countrycode">Country Code</label>
-						<input id="countrycode" class="js-countrycode form-textinput" type="text" name="country">
+						<input id="city" class="js-city form-textinput" type="text" name="city" placeholder="eg. Shanghai">
+						<label for="countrycode"><a href="http://www.nationsonline.org/oneworld/country_code_list.htm" alt="Country code resource website" target="_blank" class="countrycode-link">Country</a></label>
+						<input id="countrycode" class="js-countrycode form-textinput" type="text" name="country" placeholder="eg. CN, China">
 						<input type="submit" name="city-submit" class="form-submitbutton">
+						<span class ="js-errormessage-city hidden">*Please enter a valid city name</span>
+						<span class ="js-errormessage-cc hidden">*Please enter a valid country code</span>
+						<span class="js-apierrormessage-cc hidden"></span>
 					</fieldset>
 				</form>
 			</div>
 		</section>
 
-		<section class="js-resultspage hidden">
-			<div class="map" id="map"></div>
-			<iframe width="400" height="80" frameborder="0" allow="encrypted-media" allowtransparency="true" class="js-playlistiframe"></iframe>
+		<section class="js-resultspage hidden" id="results-page">
+			<div aria-labelledby="results-page">
+				<div class="map" id="map"></div>
+				<iframe width="400" height="80" frameborder="0" allow="encrypted-media" allowtransparency="true" class="js-playlistiframe"></iframe>
+				<button class="js-restartbutton">Get another playlist</button>
+			</div>
 		</section>
+
+		<footer role="contentinfo" id="footer">
+			<div class="photo-attr" aria-labelledby="footer">Photo by <span class="js-unsplashattr"><a href="https://unsplash.com/@lianamikah?utm_source=weatherVaneByMaryHan&utm_medium=referral" target="_blank" class="js-unsplashattr-artist unsplash-attr">Liana Mikah</a></span> on <a href="https://unsplash.com/?utm_source=weatherVaneByMaryHan&utm_medium=referral" target="_blank" class="unsplash-attr">Unsplash</a>
+			</div>
+		</footer>
 	</main>
 
 	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 	<script type="text/javascript" src="weatherbank.js"></script>
+	<script type="text/javascript" src="mapstyling.js"></script>
 	<script type="text/javascript" src="index.js"></script>
 
-	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFAVFzwPGwOzyFXFsl7nD4O_tKV-SmDZI&callback=initMap"></script>
+	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFAVFzwPGwOzyFXFsl7nD4O_tKV-SmDZI"></script>
 </body>
 </html>

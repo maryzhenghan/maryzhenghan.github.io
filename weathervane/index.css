@@ -1,11 +1,10 @@
 html, body {
-	height: 100%;
 	margin: 0;
 	padding: 0;
 }
 
 html {
-	background: url('https://images.unsplash.com/photo-1511389290465-d11bafd4c1df?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=2e5f65f729a037b1278b23e479e0c873') no-repeat center center fixed;
+	background: url('/weathervane-bg.jpeg') no-repeat center center fixed;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -24,42 +23,156 @@ header, main {
 	padding-left: 15%;
 }
 
-h1 {
+.logo {
 	margin-bottom: 0;
-	color: #39412C;
+
+	color: #636342;
 	font-family: 'Flamenco', cursive;
+	font-size: 36px;
+}
+
+.logo a:link, h1 a:visited, h1 a:hover, h1 a:active {
+	display: inline;
+	padding: 0 20px 0 10px;
+
+	background-color: #E1E3D9;
+	color: #636342;
+	opacity: .8;
+	text-decoration: none;
 }
 
 h2 {
-	margin-top: 0;
-	color: grey;
-	font-size: 16px;
+	display: inline-block;
+	margin-top: 5px;
+	margin-bottom: 30px;
+	padding: 0 20px 0 10px;
+	width: 40%;
+
+	background-color: #8B9762;
+	color: #FFFFFF;
+	font-size: 18px;
+	opacity: .8;
 }
 
-button, .form-submitbutton {
-	border: 1px solid lightgrey;
-	color: grey;
-	padding: 7px 10px;
-	text-transform: uppercase;
+button {
+	display: block;
+	padding: 7px 20px;
+
+	background-color: #FFFFFF;
+	border: 1px solid #D3D3D3;
+	color: #808080;
+	font-family: 'Lato', sans-serif;
+	opacity: .9;
+	text-transform: lowercase;
+}
+
+.js-startbutton {
+	width: 20%;
+
+	font-size: 14px;
 }
 
 .hidden {
 	display: none;
 }
 
+.photo-attr {
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	margin: 10px 0 20px 10px;
+	padding: 5px 15px 5px 25px;
+	opacity: 0.75;
+
+	background-color: #FFFFFF;
+	font-family: 'Lato', sans-serif;
+	font-size: 12px;
+	font-style: italic;
+}
+
+.unsplash-attr:link, .unsplash-attr:visited, .unsplash-attr:hover, .unsplash-attr:active {
+	color: #808080;
+}
+
 
 /* WEATHER PAGE */
+
+.js-locationpage-locationform {
+	display: inline-block;
+	margin-bottom: 25%;
+	width: 40%;
+
+	background-color: #FFFFFF;
+	opacity: .9;
+}
+
+.js-form-zipcode {
+	padding-top: 10px;
+}
 
 fieldset {
 	border: 0;
 }
 
+legend {
+	display: inline-block;
+	margin-bottom: 5px;
+	padding: 0px 10px;
+
+	background-color: #969690;
+	color: #FFFFFF;
+	font-size: 20px;
+	opacity: .8;
+}
+
 label {
 	display: block;
+
+	color: #808080;
+	font-family: 'Lato', sans-serif;
+	font-size: 16px;
+	letter-spacing: -1px;
+}
+
+::placeholder {
+	font-family: 'Lato', sans-serif;
+	font-size: 13px;
+	font-style: italic;
+	letter-spacing: -.5px;
 }
 
 .form-textinput {
+	margin-top: 3px;
+	margin-bottom: 20px;
 	padding: 7px;
+
+	border: 1px solid #D3D3D3;
+}
+
+.js-city {
+	margin-bottom: 10px;
+}
+
+.countrycode-link:link, .countrycode-link:visited, .countrycode-link:hover, .countrycode-link:active {
+	color: #808080;
+	font-family: 'Lato', sans-serif;
+}
+
+.form-submitbutton {
+	margin-top: 0px;
+	padding: 4px 10px 6px 10px;
+
+	background-color: #FFFFFF;
+	border: 1px solid #D3D3D3;
+	color: #808080;
+	font-family: 'Lato', sans-serif;
+	font-size: 14px;
+	text-transform: lowercase;
+}
+
+.js-errormessage-zc, .js-errormessage-city, .js-errormessage-cc, .js-apierrormessage-zc, .js-apierrormessage-cc {
+	color: red;
+	font-size: 13px;
 }
 
 
@@ -72,4 +185,16 @@ label {
 #map {
 	height: 350px;
 	width: 400px;
+}
+
+.js-restartbutton {
+	display: block;
+	margin-top: 5px;
+	margin-bottom: 10%;
+
+	background-color: #FFFFFF;
+	color: #808080;
+	font-size: 14px;
+	opacity: .9;
+	text-transform: lowercase;
 }
